@@ -94,7 +94,7 @@ const MultiStepForm = ({
         currentStep.validationSchema.safeParse(formValues);
 
       if (!validationResult.success) {
-        validationResult.error.errors.forEach((err) => {
+        validationResult.error.issues.forEach((err) => {
           methods.setError(err.path.join('.') as keyof CombinedCheckoutType, {
             type: 'manual',
             message: err.message
