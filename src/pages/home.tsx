@@ -1,14 +1,14 @@
-import { FormStep } from '@/types'
-import Step1 from './checkout/step1'
-import Step2 from './checkout/step2'
+import { FormStep } from '@/types';
+import Step1 from './checkout/step1';
+import Step2 from './checkout/step2';
 import {
   step1Schema,
   step2Schema,
-  step3Schema,
-} from '@/validators/checkout-flow.validator'
-import MultiStepForm from '@/components/stepped-form/stepped-form'
-import Step3 from './checkout/step3'
-import { HomeIcon, UserIcon, CreditCardIcon } from 'lucide-react'
+  step3Schema
+} from '@/validators/checkout-flow.validator';
+import MultiStepForm from '@/components/stepped-form/stepped-form';
+import Step3 from './checkout/step3';
+import { HomeIcon, UserIcon, CreditCardIcon } from 'lucide-react';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const checkoutSteps: FormStep[] = [
@@ -18,7 +18,7 @@ export const checkoutSteps: FormStep[] = [
     icon: UserIcon,
     position: 1,
     validationSchema: step1Schema,
-    fields: ['email', 'firstName', 'lastName'],
+    fields: ['email', 'firstName', 'lastName']
   },
   {
     title: 'Step 2: Address Details',
@@ -26,7 +26,7 @@ export const checkoutSteps: FormStep[] = [
     icon: HomeIcon,
     position: 2,
     validationSchema: step2Schema,
-    fields: ['country', 'city', 'shippingAddress'],
+    fields: ['country', 'city', 'shippingAddress']
   },
   {
     title: 'Step 3: Payment Details',
@@ -34,14 +34,14 @@ export const checkoutSteps: FormStep[] = [
     icon: CreditCardIcon,
     position: 3,
     validationSchema: step3Schema,
-    fields: ['cardNumber', 'cardholderName', 'cvv'],
-  },
-]
+    fields: ['cardNumber', 'cardholderName', 'cvv']
+  }
+];
 
 export default function Home() {
   return (
     <div>
-      <MultiStepForm steps={checkoutSteps} localStorageKey='checkout-form' />
+      <MultiStepForm steps={checkoutSteps} localStorageKey="checkout-form" />
     </div>
-  )
+  );
 }
