@@ -1,1 +1,1 @@
-export { default } from './stepped-form'
+export { default } from './stepped-form';

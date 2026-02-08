@@ -1,16 +1,16 @@
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form';
 
 interface ProvidersProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function Providers({ children }: ProvidersProps) {
-  const methods = useForm()
+  const methods = useForm();
 
   return (
     <FormProvider {...methods}>
       {/* more providers here */}
       {children}
     </FormProvider>
-  )
+  );
 }

@@ -1,33 +1,33 @@
-import { Check } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { useMultiStepForm } from '@/hooks/use-stepped-form'
-import { checkoutSteps } from '@/pages/home'
+import { Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useMultiStepForm } from '@/hooks/use-stepped-form';
+import { checkoutSteps } from '@/pages/home';
 
 export default function ProgressIndicator() {
-  const { currentStep, goToStep, currentStepIndex } = useMultiStepForm()
+  const { currentStep, goToStep, currentStepIndex } = useMultiStepForm();
 
   return (
-    <div className='flex items-center w-fulljustify-centerp-4 mb-10'>
-      <div className='w-full space-y-8'>
-        <div className='relative flex justify-between'>
+    <div className="flex items-center w-fulljustify-centerp-4 mb-10">
+      <div className="w-full space-y-8">
+        <div className="relative flex justify-between">
           {/* Progress Line */}
-          <div className='absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-gray-200'>
+          <div className="absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-gray-200">
             <motion.div
-              className='h-full bg-black'
+              className="h-full bg-black"
               initial={{ width: '0%' }}
               animate={{
-                width: `${(currentStepIndex / (checkoutSteps.length - 1)) * 100}%`,
+                width: `${(currentStepIndex / (checkoutSteps.length - 1)) * 100}%`
               }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
             />
           </div>
           {/* Steps */}
           {checkoutSteps.map((step) => {
-            const isCompleted = currentStepIndex > step.position - 1
-            const isCurrent = currentStepIndex === step.position - 1
+            const isCompleted = currentStepIndex > step.position - 1;
+            const isCurrent = currentStepIndex === step.position - 1;
 
             return (
-              <div key={step.position} className='relative z-10'>
+              <div key={step.position} className="relative z-10">
                 <motion.button
                   onClick={() => goToStep(step.position)}
                   className={`flex size-16 items-center justify-center rounded-full border-2 ${
@@ -38,13 +38,13 @@ export default function ProgressIndicator() {
                   initial={false}
                   animate={{
                     scale: isCurrent ? 1.1 : 1,
-                    transition: { type: 'spring', stiffness: 500, damping: 30 },
+                    transition: { type: 'spring', stiffness: 500, damping: 30 }
                   }}
                 >
                   {isCompleted ? (
-                    <Check className='h-6 w-6' />
+                    <Check className="h-6 w-6" />
                   ) : (
-                    <step.icon className='h-6 w-6' />
+                    <step.icon className="h-6 w-6" />
                   )}
                 </motion.button>
                 <div
@@ -55,15 +55,15 @@ export default function ProgressIndicator() {
                   {step.position}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
 
         {/* Screen reader progress */}
-        <div className='sr-only' role='status' aria-live='polite'>
+        <div className="sr-only" role="status" aria-live="polite">
           {`Step ${currentStep.position} of ${checkoutSteps.length}: ${currentStep.title}`}
         </div>
       </div>
     </div>
-  )
+  );
 }
