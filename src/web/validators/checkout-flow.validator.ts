@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
 export const step1Schema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
+  email: z.email({
+    error: 'Please enter a valid email address'
+  }),
   firstName: z.string().min(3, 'First name must be at least 3 characters'),
   lastName: z.string().min(3, 'Last name must be at least 3 characters')
 });
@@ -33,7 +35,7 @@ export const step3Schema = z.object({
 });
 
 export const CombinedCheckoutSchema = step1Schema
-  .merge(step2Schema)
-  .merge(step3Schema);
+  .extend(step2Schema.shape)
+  .extend(step3Schema.shape);
 
 export type CombinedCheckoutType = z.infer<typeof CombinedCheckoutSchema>;

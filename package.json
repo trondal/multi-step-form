@@ -15,7 +15,7 @@
     "tsc": "npx tsc"
   },
   "dependencies": {
-    "@hookform/resolvers": "3.10.0",
+    "@hookform/resolvers": "5.2.2",
     "@mantine/hooks": "7.17.8",
     "@radix-ui/react-label": "2.1.8",
     "@radix-ui/react-slot": "1.2.4",
@@ -34,7 +34,7 @@
     "react-router-dom": "7.13.0",
     "tailwind-merge": "2.6.1",
     "tailwindcss-animate": "1.0.7",
-    "zod": "3.25.76"
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "9.39.2",
