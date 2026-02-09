@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prettier": "prettier --check 'index.html' '*.config.js' '{api,src}/**/*{js,jsx,ts,tsx,md,html,css,scss}'",
+    "prettier:check": "prettier --check 'index.html' '*.config.js' '{api,src}/**/*{js,jsx,ts,tsx,md,html,css,scss}'",
     "prettier:write": "prettier --write 'index.html' '*.config.js' '{api,src}/**/*{js,jsx,ts,tsx,md,html,css,scss}'",
     "start": "concurrently -n web,api -c auto \"vite\" \"tsx watch src/api/server.ts\"",
     "tsc": "npx tsc"

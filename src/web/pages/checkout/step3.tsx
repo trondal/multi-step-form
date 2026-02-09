@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/web/components/ui/input';
 import { z } from 'zod';
-import { CombinedCheckoutSchema } from '@/validators/checkout-flow.validator';
-import ErrorMessage from '@/components/ui/error-mesage';
-import NextButton from '@/components/stepped-form/next-button';
+import { CombinedCheckoutSchema } from '@/web/validators/checkout-flow.validator';
+import ErrorMessage from '@/web/components/ui/error-mesage';
+import NextButton from '@/web/components/stepped-form/next-button';
 
 const Step3 = () => {
   const {
@@ -18,15 +18,23 @@ const Step3 = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <Input {...register('cardNumber')} placeholder="Card Number" />
+        <Input
+          {...register('cardNumber')}
+          placeholder="Card Number"
+          autoComplete="cc-number"
+        />
         <ErrorMessage message={errors.cardNumber?.message} />
       </div>
       <div>
-        <Input {...register('cardholderName')} placeholder="Card Holder Name" />
+        <Input
+          {...register('cardholderName')}
+          placeholder="Card Holder Name"
+          autoComplete="cc-name"
+        />
         <ErrorMessage message={errors.cardholderName?.message} />
       </div>
       <div>
-        <Input {...register('cvv')} placeholder="CVV" />
+        <Input {...register('cvv')} placeholder="CVV" autoComplete="cc-csc" />
         <ErrorMessage message={errors.cvv?.message} />
       </div>
       <NextButton type="submit" onClick={handleStepSubmit} />

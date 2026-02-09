@@ -1,8 +1,8 @@
-import NextButton from '@/components/stepped-form/next-button';
-import ErrorMessage from '@/components/ui/error-mesage';
-import { Input } from '@/components/ui/input';
-import { useMultiStepForm } from '@/hooks/use-stepped-form';
-import { CombinedCheckoutSchema } from '@/validators/checkout-flow.validator';
+import NextButton from '@/web/components/stepped-form/next-button';
+import ErrorMessage from '@/web/components/ui/error-mesage';
+import { Input } from '@/web/components/ui/input';
+import { useMultiStepForm } from '@/web/hooks/use-stepped-form';
+import { CombinedCheckoutSchema } from '@/web/validators/checkout-flow.validator';
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -34,15 +34,27 @@ const Step1 = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <Input {...register('email')} placeholder="Email" />
+        <Input
+          {...register('email')}
+          placeholder="Email"
+          autoComplete="email"
+        />
         <ErrorMessage message={errors.email?.message} />
       </div>
       <div>
-        <Input {...register('firstName')} placeholder="First Name" />
+        <Input
+          {...register('firstName')}
+          placeholder="First Name"
+          autoComplete="given-name"
+        />
         <ErrorMessage message={errors.firstName?.message} />
       </div>
       <div>
-        <Input {...register('lastName')} placeholder="Last Name" />
+        <Input
+          {...register('lastName')}
+          placeholder="Last Name"
+          autoComplete="family-name"
+        />
         <ErrorMessage message={errors.lastName?.message} />
       </div>
       <NextButton onClick={handleStepSubmit} />

@@ -1,4 +1,4 @@
-import { useMultiStepForm } from '@/hooks/use-stepped-form';
+import { useMultiStepForm } from '@/web/hooks/use-stepped-form';
 import { Button } from '../ui/button';
 
 const NextButton = ({

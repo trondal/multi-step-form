@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/web/components/ui/input';
 import { z } from 'zod';
-import { CombinedCheckoutSchema } from '@/validators/checkout-flow.validator';
-import { useMultiStepForm } from '@/hooks/use-stepped-form';
-import ErrorMessage from '@/components/ui/error-mesage';
-import NextButton from '@/components/stepped-form/next-button';
+import { CombinedCheckoutSchema } from '@/web/validators/checkout-flow.validator';
+import { useMultiStepForm } from '@/web/hooks/use-stepped-form';
+import ErrorMessage from '@/web/components/ui/error-mesage';
+import NextButton from '@/web/components/stepped-form/next-button';
 
 const Step2 = () => {
   const {
@@ -22,17 +22,26 @@ const Step2 = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <Input {...register('country')} placeholder="Country" />
+        <Input
+          {...register('country')}
+          placeholder="Country"
+          autoComplete="country-name"
+        />
         <ErrorMessage message={errors.country?.message} />
       </div>
       <div>
-        <Input {...register('city')} placeholder="City" />
+        <Input
+          {...register('city')}
+          placeholder="City"
+          autoComplete="address-level2"
+        />
         <ErrorMessage message={errors.city?.message} />
       </div>
       <div>
         <Input
           {...register('shippingAddress')}
           placeholder="Shipping Address"
+          autoComplete="street-address"
         />
         <ErrorMessage message={errors.shippingAddress?.message} />
       </div>

@@ -1,4 +1,4 @@
-import { MultiStepFormContext } from '@/components/stepped-form/stepped-form';
+import { MultiStepFormContext } from '@/web/components/stepped-form/stepped-form';
 import { useContext } from 'react';
 
 export const useMultiStepForm = () => {

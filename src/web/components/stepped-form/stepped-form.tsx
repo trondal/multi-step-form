@@ -3,15 +3,15 @@ import { createContext, useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { FormStep, MultiStepFormContextProps, SavedFormState } from '@/types';
-import PrevButton from '@/components/stepped-form/prev-button';
+import PrevButton from '@/web/components/stepped-form/prev-button';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   CombinedCheckoutSchema,
   CombinedCheckoutType
-} from '@/validators/checkout-flow.validator';
+} from '@/web/validators/checkout-flow.validator';
 import ProgressIndicator from './progress-indicator';
 import { useLocalStorage } from '@mantine/hooks';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/web/hooks/use-toast';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const MultiStepFormContext =

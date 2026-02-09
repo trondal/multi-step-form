@@ -1,5 +1,5 @@
 import { ZodType } from 'zod';
-import { CombinedCheckoutType } from './validators/checkout-flow.validator';
+import { CombinedCheckoutType } from './web/validators/checkout-flow.validator';
 import { LucideIcon } from 'lucide-react';
 
 type FieldKeys = keyof CombinedCheckoutType;

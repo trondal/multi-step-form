@@ -5,8 +5,8 @@ import {
   step1Schema,
   step2Schema,
   step3Schema
-} from '@/validators/checkout-flow.validator';
-import MultiStepForm from '@/components/stepped-form/stepped-form';
+} from '@/web/validators/checkout-flow.validator';
+import MultiStepForm from '@/web/components/stepped-form/stepped-form';
 import Step3 from './checkout/step3';
 import { HomeIcon, UserIcon, CreditCardIcon } from 'lucide-react';
 
