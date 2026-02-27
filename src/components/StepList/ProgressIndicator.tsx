@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useMultiStepForm } from '../../hooks/use-stepped-form';
-import { checkoutSteps } from '../../pages/home';
+import { useMultiStepForm } from '../../hooks/useMultiStepForm';
+import { checkoutSteps } from '../../pages/Home';
 
 export default function ProgressIndicator() {
   const { currentStep, goToStep, currentStepIndex } = useMultiStepForm();

@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Input } from '../../components/ui/input';
-import { CombinedCheckoutSchema } from '../../validators/checkout-flow.validator';
-import { useMultiStepForm } from '../../hooks/use-stepped-form';
-import ErrorMessage from '../../components/ui/error-mesage';
-import NextButton from '../../components/stepped-form/next-button';
+import { Input } from '../../components/ui/Input';
+import { CombinedCheckoutSchema } from '../../validators/schema';
+import { useMultiStepForm } from '../../hooks/useMultiStepForm';
+import ErrorMessage from '../../components/ui/ErrorMessage';
+import NextButton from '../../components/StepList/NextButton';
 
 const Step2 = () => {
   const {
