@@ -7,15 +7,15 @@ import {
   type MultiStepFormContextProps,
   type SavedFormState
 } from '../../types';
-import PrevButton from '../../components/stepped-form/prev-button';
+import PrevButton from './PrevButton';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   CombinedCheckoutSchema,
   type CombinedCheckoutType
-} from '../../validators/checkout-flow.validator';
-import ProgressIndicator from './progress-indicator';
+} from '../../validators/schema';
+import ProgressIndicator from './ProgressIndicator';
 
-import { useToast } from '../../hooks/use-toast';
+import { useToast } from '../../hooks/useToast';
 import { MultiStepFormContext } from '../../pages/MultiStepFormContext';
 
 const MultiStepForm = ({
@@ -28,15 +28,15 @@ const MultiStepForm = ({
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: 'test@bobbo.com',
+      email: 'chester@nimitz',
       firstName: 'Chester',
       lastName: 'Nimitz',
-      country: 'Norway',
-      city: 'Oslo',
-      shippingAddress: 'Svingen 30',
+      country: 'USA',
+      city: 'Fredricksburg',
+      shippingAddress: 'Svingen. 30',
       cardholderName: 'Chester Nimitz',
       cardNumber: '5105105105105100',
-      cvv: '222'
+      cvv: '176'
     }
   });
 
@@ -95,7 +95,7 @@ const MultiStepForm = ({
         currentStep.validationSchema.safeParse(formValues);
 
       if (!validationResult.success) {
-        validationResult.error.errors.forEach((err) => {
+        validationResult.error.issues.forEach((err) => {
           methods.setError(err.path.join('.') as keyof CombinedCheckoutType, {
             type: 'manual',
             message: err.message

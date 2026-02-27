@@ -1,13 +1,9 @@
 import { type FormStep } from '../types';
-import Step1 from './checkout/step1';
-import Step2 from './checkout/step2';
-import {
-  step1Schema,
-  step2Schema,
-  step3Schema
-} from '../validators/checkout-flow.validator';
-import MultiStepForm from '../components/stepped-form/stepped-form';
-import Step3 from './checkout/step3';
+import Step1 from './checkout/Step1';
+import Step2 from './checkout/Step2';
+import { step1Schema, step2Schema, step3Schema } from '../validators/schema';
+import MultiStepForm from '../components/StepList/MultiStepForm';
+import Step3 from './checkout/Step3';
 import { HomeIcon, UserIcon, CreditCardIcon } from 'lucide-react';
 
 // eslint-disable-next-line react-refresh/only-export-components
