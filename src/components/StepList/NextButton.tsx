@@ -1,23 +1,23 @@
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
-import { Button } from '../ui/Button';
+import Button from '@mui/material/Button';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const NextButton = ({
   onClick,
-  type,
-  ...rest
+  type
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { isLastStep } = useMultiStepForm();
 
   return (
     <Button
-      className="text-white bg-black hover:bg-slate-950 transition-colors w-full py-6"
-      type={type ?? 'button'}
       onClick={onClick}
-      {...rest}
+      type={type ?? 'button'}
+      variant="contained"
+      endIcon={<NavigateNextIcon />}
     >
       {isLastStep ? 'Submit' : 'Continue'}
     </Button>
   );
 };
 
-export default NextButton;
+export { NextButton };

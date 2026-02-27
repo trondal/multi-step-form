@@ -1,6 +1,6 @@
 import { ZodType } from 'zod';
 import { type CombinedCheckoutType } from './validators/schema';
-import { type LucideIcon } from 'lucide-react';
+import { type SvgIconComponent } from '@mui/icons-material';
 
 type FieldKeys = keyof CombinedCheckoutType;
 
@@ -18,7 +18,7 @@ export interface MultiStepFormContextProps {
 export type FormStep = {
   title: string;
   component: React.ReactElement;
-  icon: LucideIcon;
+  icon: SvgIconComponent;
   position: number;
   validationSchema: ZodType<unknown>;
   fields: FieldKeys[];

@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react';
+import CheckIcon from '@mui/icons-material/Check';
 import { motion } from 'framer-motion';
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
 import { checkoutSteps } from '../../pages/Home';
@@ -42,7 +42,7 @@ export default function ProgressIndicator() {
                   }}
                 >
                   {isCompleted ? (
-                    <Check className="h-6 w-6" />
+                    <CheckIcon className="h-6 w-6" />
                   ) : (
                     <step.icon className="h-6 w-6" />
                   )}

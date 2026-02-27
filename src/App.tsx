@@ -1,12 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import { Toaster } from './components/ui/Toaster';
 
 function App() {
   return (
     <main>
       <BrowserRouter>
-        <Toaster />
         <div className="min-h-screen w-screen flex items-center justify-center">
           <Routes>
             <Route path="/" element={<Home />} />
