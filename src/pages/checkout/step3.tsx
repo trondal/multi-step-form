@@ -17,7 +17,7 @@ const Step3 = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div>
       <div>
         <TextField
           fullWidth

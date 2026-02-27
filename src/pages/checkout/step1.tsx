@@ -33,7 +33,7 @@ const Step1 = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div>
       <div>
         <TextField fullWidth {...register('email')} placeholder="Email" />
         <ErrorMessage message={errors.email?.message} />

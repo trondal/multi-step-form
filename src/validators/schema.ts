@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const step1Schema = z.object({
-  email: z.email({ error: 'Please enter a valid email address' }),
+  email: z.string().min(2, { error: 'Please enter a valid email address' }),
   firstName: z
     .string()
     .min(3, { error: 'First name must be at least 3 characters' }),
@@ -26,9 +26,12 @@ export const step2Schema = z.object({
 });
 
 export const step3Schema = z.object({
-  cardNumber: z.string().regex(/^[0-9]{16}$/, {
+  cardNumber: z
+    .string()
+    .min(3, { error: 'CardNumber must be at least 3 characters' }),
+  /*cardNumber: z.string().regex(/^[0-9]{16}$/, {
     error: 'Please enter a valid 16-digit card number'
-  }),
+  }),*/
   cardholderName: z
     .string()
     .min(2, { error: 'Cardholder name must be at least 2 characters' })
@@ -36,8 +39,10 @@ export const step3Schema = z.object({
   cvv: z.string().regex(/^[0-9]{3,4}$/, { error: 'Please enter a valid CVV' })
 });
 
-export const CombinedCheckoutSchema = step1Schema
-  .merge(step2Schema)
-  .merge(step3Schema);
+export const CombinedCheckoutSchema = z.object({
+  ...step1Schema.shape,
+  ...step2Schema.shape,
+  ...step3Schema.shape
+});
 
 export type CombinedCheckoutType = z.infer<typeof CombinedCheckoutSchema>;
