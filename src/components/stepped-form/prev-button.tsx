@@ -1,4 +1,4 @@
-import { useMultiStepForm } from '@/hooks/use-stepped-form';
+import { useMultiStepForm } from '../../hooks/use-stepped-form';
 import { Button } from '../ui/button';
 
 const PrevButton = () => {

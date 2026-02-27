@@ -1,21 +1,22 @@
 import { z } from 'zod';
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-import { FormStep, MultiStepFormContextProps, SavedFormState } from '@/types';
-import PrevButton from '@/components/stepped-form/prev-button';
+import { useLocalStorage } from '@mantine/hooks';
+import {
+  type FormStep,
+  type MultiStepFormContextProps,
+  type SavedFormState
+} from '../../types';
+import PrevButton from '../../components/stepped-form/prev-button';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   CombinedCheckoutSchema,
-  CombinedCheckoutType
-} from '@/validators/checkout-flow.validator';
+  type CombinedCheckoutType
+} from '../../validators/checkout-flow.validator';
 import ProgressIndicator from './progress-indicator';
-import { useLocalStorage } from '@mantine/hooks';
-import { useToast } from '@/hooks/use-toast';
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const MultiStepFormContext =
-  createContext<MultiStepFormContextProps | null>(null);
+import { useToast } from '../../hooks/use-toast';
+import { MultiStepFormContext } from '../../pages/MultiStepFormContext';
 
 const MultiStepForm = ({
   steps,

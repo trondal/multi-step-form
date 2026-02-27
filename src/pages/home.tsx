@@ -1,12 +1,12 @@
-import { FormStep } from '@/types';
+import { type FormStep } from '../types';
 import Step1 from './checkout/step1';
 import Step2 from './checkout/step2';
 import {
   step1Schema,
   step2Schema,
   step3Schema
-} from '@/validators/checkout-flow.validator';
-import MultiStepForm from '@/components/stepped-form/stepped-form';
+} from '../validators/checkout-flow.validator';
+import MultiStepForm from '../components/stepped-form/stepped-form';
 import Step3 from './checkout/step3';
 import { HomeIcon, UserIcon, CreditCardIcon } from 'lucide-react';
 
