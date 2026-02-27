@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocalStorage } from '@mantine/hooks';
+//import { useLocalStorage } from '@mantine/hooks';
 import {
   type FormStep,
-  type MultiStepFormContextProps,
-  type SavedFormState
+  type MultiStepFormContextProps
+  //type SavedFormState
 } from '../../types';
 import { PrevButton } from './PrevButton';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -21,7 +21,7 @@ import Alert from '@mui/material/Alert';
 
 const MultiStepForm = ({
   steps,
-  localStorageKey = 'multi-step-form'
+  localStorageKey
 }: {
   steps: FormStep[];
   localStorageKey: string;
@@ -29,17 +29,19 @@ const MultiStepForm = ({
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: 'chester@nimitz.com',
-      firstName: 'Chester',
-      lastName: 'Nimitz',
-      country: 'USA',
-      city: 'Fredricksburg',
-      shippingAddress: 'Svingen. 30',
-      cardholderName: 'Chester Nimitz',
-      cardNumber: '5105105105105100',
-      cvv: '176'
+      email: '',
+      firstName: '',
+      lastName: '',
+      country: '',
+      city: '',
+      shippingAddress: '',
+      cardholderName: '',
+      cardNumber: '',
+      cvv: ''
     }
   });
+
+  console.log(localStorageKey);
 
   const [open, setOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -48,34 +50,34 @@ const MultiStepForm = ({
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
 
-  const [savedFormState, setSavedFormState] =
+  /*const [savedFormState, setSavedFormState] =
     useLocalStorage<SavedFormState | null>({
       key: localStorageKey,
       defaultValue: null
-    });
+    });*/
 
   // Restore form state from LS
-  useEffect(() => {
+  /*useEffect(() => {
     if (savedFormState) {
       setCurrentStepIndex(savedFormState.currentStepIndex);
       methods.reset(savedFormState.formValues);
     }
-  }, [methods, savedFormState]);
+  }, [methods, savedFormState]);*/
 
-  const saveFormState = (stepIndex: number) => {
+  /*const saveFormState = (stepIndex: number) => {
     const formValues = methods.getValues();
     setSavedFormState({
       currentStepIndex: stepIndex ?? currentStepIndex,
       formValues
     });
-  };
+  };*/
 
-  const clearFormState = () => {
+  /*const clearFormState = () => {
     setSavedFormState(null);
     setCurrentStepIndex(0);
     methods.reset();
     window.localStorage.removeItem(localStorageKey);
-  };
+  };*/
 
   const nextStep = async () => {
     const isValid = await methods.trigger(currentStep.fields);
@@ -110,21 +112,21 @@ const MultiStepForm = ({
     }
 
     if (currentStepIndex < steps.length - 1) {
-      saveFormState(currentStepIndex + 1);
+      //saveFormState(currentStepIndex + 1);
       setCurrentStepIndex(currentStepIndex + 1);
     }
   };
 
   const previousStep = () => {
     if (currentStepIndex > 0) {
-      saveFormState(currentStepIndex - 1);
+      //saveFormState(currentStepIndex - 1);
       setCurrentStepIndex(currentStepIndex - 1);
     }
   };
 
   const goToStep = (position: number) => {
     if (position >= 0 && position - 1 < steps.length) {
-      saveFormState(position - 1);
+      //saveFormState(position - 1);
       setCurrentStepIndex(position - 1);
     }
   };
@@ -133,20 +135,9 @@ const MultiStepForm = ({
     data: z.infer<typeof CombinedCheckoutSchema>
   ) {
     try {
-      // Perform your form submission logic here
-      console.log('data', data);
-
       setOpen(true);
       setToastMessage(JSON.stringify(data, null, 2));
-      /*toast({
-        title: 'Form Submitted Successfully!',
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        )
-      });*/
-      clearFormState();
+      //clearFormState();
     } catch (error) {
       console.error('Form submission error:', error);
     }
@@ -177,10 +168,10 @@ const MultiStepForm = ({
   return (
     <MultiStepFormContext.Provider value={value}>
       <FormProvider {...methods}>
-        <div className="w-[550px] mx-auto">
+        <div>
           <ProgressIndicator />
           <form onSubmit={methods.handleSubmit(submitSteppedForm)}>
-            <h1 className="py-5 text-3xl font-bold">{currentStep.title}</h1>
+            <h1 className="">{currentStep.title}</h1>
             {currentStep.component}
             <PrevButton />
           </form>
