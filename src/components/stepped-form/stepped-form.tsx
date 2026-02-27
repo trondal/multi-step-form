@@ -27,15 +27,15 @@ const MultiStepForm = ({
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      country: '',
-      city: '',
-      shippingAddress: '',
-      cardholderName: '',
-      cardNumber: '',
-      cvv: ''
+      email: 'test@bobbo.com',
+      firstName: 'Chester',
+      lastName: 'Nimitz',
+      country: 'Norway',
+      city: 'Oslo',
+      shippingAddress: 'Svingen 30',
+      cardholderName: 'Chester Nimitz',
+      cardNumber: '5105105105105100',
+      cvv: '222'
     }
   });
 
@@ -94,7 +94,7 @@ const MultiStepForm = ({
         currentStep.validationSchema.safeParse(formValues);
 
       if (!validationResult.success) {
-        validationResult.error.issues.forEach((err) => {
+        validationResult.error.errors.forEach((err) => {
           methods.setError(err.path.join('.') as keyof CombinedCheckoutType, {
             type: 'manual',
             message: err.message
