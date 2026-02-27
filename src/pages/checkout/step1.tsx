@@ -1,10 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
-import NextButton from '../../components/StepList/NextButton';
+import { NextButton } from '../../components/StepList/NextButton';
 import ErrorMessage from '../../components/ui/ErrorMessage';
-import { Input } from '../../components/ui/Input';
+//import { Input } from '../../components/ui/Input';
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
 import { CombinedCheckoutSchema } from '../../validators/schema';
+import TextField from '@mui/material/TextField';
 
 const Step1 = () => {
   const {
@@ -34,15 +35,23 @@ const Step1 = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <Input {...register('email')} placeholder="Email" />
+        <TextField fullWidth {...register('email')} placeholder="Email" />
         <ErrorMessage message={errors.email?.message} />
       </div>
       <div>
-        <Input {...register('firstName')} placeholder="First Name" />
+        <TextField
+          fullWidth
+          {...register('firstName')}
+          placeholder="First Name"
+        />
         <ErrorMessage message={errors.firstName?.message} />
       </div>
       <div>
-        <Input {...register('lastName')} placeholder="Last Name" />
+        <TextField
+          fullWidth
+          {...register('lastName')}
+          placeholder="Last Name"
+        />
         <ErrorMessage message={errors.lastName?.message} />
       </div>
       <NextButton onClick={handleStepSubmit} />

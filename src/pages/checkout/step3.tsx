@@ -1,10 +1,10 @@
 import { useFormContext } from 'react-hook-form';
 import { z } from 'zod';
+import TextField from '@mui/material/TextField';
 
-import { Input } from '../../components/ui/Input';
 import { CombinedCheckoutSchema } from '../../validators/schema';
 import ErrorMessage from '../../components/ui/ErrorMessage';
-import NextButton from '../../components/StepList/NextButton';
+import { NextButton } from '../../components/StepList/NextButton';
 
 const Step3 = () => {
   const {
@@ -19,15 +19,23 @@ const Step3 = () => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        <Input {...register('cardNumber')} placeholder="Card Number" />
+        <TextField
+          fullWidth
+          {...register('cardNumber')}
+          placeholder="Card Number"
+        />
         <ErrorMessage message={errors.cardNumber?.message} />
       </div>
       <div>
-        <Input {...register('cardholderName')} placeholder="Card Holder Name" />
+        <TextField
+          fullWidth
+          {...register('cardholderName')}
+          placeholder="Card Holder Name"
+        />
         <ErrorMessage message={errors.cardholderName?.message} />
       </div>
       <div>
-        <Input {...register('cvv')} placeholder="CVV" />
+        <TextField fullWidth {...register('cvv')} placeholder="CVV" />
         <ErrorMessage message={errors.cvv?.message} />
       </div>
       <NextButton type="submit" onClick={handleStepSubmit} />
