@@ -7,7 +7,7 @@ import {
   type MultiStepFormContextProps,
   type SavedFormState
 } from '../../types';
-import PrevButton from './PrevButton';
+import { PrevButton } from './PrevButton';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   CombinedCheckoutSchema,
@@ -15,8 +15,9 @@ import {
 } from '../../validators/schema';
 import ProgressIndicator from './ProgressIndicator';
 
-import { useToast } from '../../hooks/useToast';
 import { MultiStepFormContext } from '../../pages/MultiStepFormContext';
+import Snackbar, { type SnackbarCloseReason } from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const MultiStepForm = ({
   steps,
@@ -28,7 +29,7 @@ const MultiStepForm = ({
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: 'chester@nimitz',
+      email: 'chester@nimitz.com',
       firstName: 'Chester',
       lastName: 'Nimitz',
       country: 'USA',
@@ -40,7 +41,10 @@ const MultiStepForm = ({
     }
   });
 
-  const { toast } = useToast();
+  const [open, setOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  //const { toast } = useToast();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
 
@@ -131,19 +135,33 @@ const MultiStepForm = ({
     try {
       // Perform your form submission logic here
       console.log('data', data);
-      toast({
+
+      setOpen(true);
+      setToastMessage(JSON.stringify(data, null, 2));
+      /*toast({
         title: 'Form Submitted Successfully!',
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
           </pre>
         )
-      });
+      });*/
       clearFormState();
     } catch (error) {
       console.error('Form submission error:', error);
     }
   }
+
+  const handleClose = (
+    _event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const value: MultiStepFormContextProps = {
     currentStep: steps[currentStepIndex],
@@ -166,6 +184,15 @@ const MultiStepForm = ({
             {currentStep.component}
             <PrevButton />
           </form>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            sx={{ maxWidth: 300 }}
+            open={open}
+            autoHideDuration={5000}
+            onClose={handleClose}
+          >
+            <Alert severity="success">{toastMessage}</Alert>
+          </Snackbar>
         </div>
       </FormProvider>
     </MultiStepFormContext.Provider>

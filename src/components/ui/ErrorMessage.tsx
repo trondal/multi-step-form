@@ -1,11 +1,12 @@
-interface ErrorMessageProps {
-  message?: string; // The error message (optional)
+import Alert from '@mui/material/Alert';
+
+interface Props {
+  message?: string;
 }
 
-const ErrorMessage = ({ message }: ErrorMessageProps) => {
-  return (
-    <p className="h-5 text-sm mt-1 text-rose-400">{message ? message : null}</p>
-  );
+const ErrorMessage = ({ message }: Props) => {
+  if (!message) return;
+  return <Alert severity="error">{message}</Alert>;
 };
 
 export default ErrorMessage;

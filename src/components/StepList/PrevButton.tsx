@@ -1,20 +1,21 @@
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
-import { Button } from '../ui/Button';
+import Button from '@mui/material/Button';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 const PrevButton = () => {
   const { isFirstStep, previousStep } = useMultiStepForm();
 
   return (
     <Button
-      variant="outline"
+      variant="contained"
       type="button"
-      className="mt-5"
       onClick={previousStep}
       disabled={isFirstStep}
+      startIcon={<NavigateBeforeIcon />}
     >
       Previous
     </Button>
   );
 };
 
-export default PrevButton;
+export { PrevButton };
