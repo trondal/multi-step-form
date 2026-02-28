@@ -15,8 +15,6 @@ import { purple } from '@mui/material/colors';
 export default function ProgressIndicator() {
   const { goToStep, currentStepIndex } = useMultiStepForm();
 
-  console.log(currentStepIndex);
-
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={currentStepIndex}>
@@ -36,9 +34,15 @@ export default function ProgressIndicator() {
               <StepLabel>
                 <IconButton color="inherit">
                   {isCompleted ? (
-                    <CheckIcon color="inherit" />
+                    <CheckIcon color="primary" />
                   ) : (
-                    <step.icon color="inherit" />
+                    <step.icon
+                      color={
+                        currentStepIndex + 1 === step.position
+                          ? 'primary'
+                          : 'inherit'
+                      }
+                    />
                   )}
                 </IconButton>
               </StepLabel>
