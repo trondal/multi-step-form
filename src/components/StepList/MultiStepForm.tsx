@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 //import { useLocalStorage } from '@mantine/hooks';
+import { DevTool } from '@hookform/devtools';
 import {
   type FormStep,
   type MultiStepFormContextProps
@@ -186,6 +187,7 @@ const MultiStepForm = ({
           </Snackbar>
         </div>
       </FormProvider>
+      <DevTool control={methods.control} />
     </MultiStepFormContext.Provider>
   );
 };
