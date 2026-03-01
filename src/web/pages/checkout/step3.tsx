@@ -37,6 +37,22 @@ const Step3 = () => {
         <Input {...register('cvv')} placeholder="CVV" autoComplete="cc-csc" />
         <ErrorMessage message={errors.cvv?.message} />
       </div>
+      <div>
+        <input
+          id="profile"
+          type="file"
+          onChange={(e) =>
+            register('profile').onChange({
+              target: { name: 'profile', value: e.target.files?.[0] }
+            })
+          }
+          name="profile"
+          onBlur={register('profile').onBlur}
+          ref={register('profile').ref}
+        />
+        <ErrorMessage message={errors.profile?.message?.toString()} />
+      </div>
+
       <NextButton type="submit" onClick={handleStepSubmit} />
     </div>
   );

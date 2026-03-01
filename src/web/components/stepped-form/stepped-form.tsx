@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { createContext, useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 
 import { FormStep, MultiStepFormContextProps, SavedFormState } from '@/types';
 import PrevButton from '@/web/components/stepped-form/prev-button';
@@ -17,6 +18,16 @@ import { useToast } from '@/web/hooks/use-toast';
 export const MultiStepFormContext =
   createContext<MultiStepFormContextProps | null>(null);
 
+type UploadResponse =
+  | {
+      ok: true;
+      originalName: string;
+      storedName: string;
+      size: number;
+      mimeType: string;
+    }
+  | { ok: false; error: string };
+
 const MultiStepForm = ({
   steps,
   localStorageKey = 'multi-step-form'
@@ -24,18 +35,22 @@ const MultiStepForm = ({
   steps: FormStep[];
   localStorageKey: string;
 }) => {
+  const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [status, setStatus] = useState('');
+
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      country: '',
-      city: '',
-      shippingAddress: '',
-      cardholderName: '',
-      cardNumber: '',
-      cvv: ''
+      email: 'trond.albinussen@gmail.com',
+      firstName: 'Trond',
+      lastName: 'Albinussen',
+      country: 'Norway',
+      city: 'Oslo',
+      shippingAddress: 'Grefsenveien 34C',
+      cardholderName: 'Trond Albinussen',
+      cardNumber: '5401854781835008',
+      cvv: '501',
+      profile: undefined
     }
   });
 
@@ -128,8 +143,80 @@ const MultiStepForm = ({
     data: z.infer<typeof CombinedCheckoutSchema>
   ) {
     try {
+      console.log(data);
+
+      /*if (!file) {
+        setStatus('Pick a file first.');
+        return;
+      }*/
+
+      /*const form = new FormData();
+      form.append('file', data.profile as File);
+      form.append('email', data.cardNumber);
+      form.append('firstName', data.cardholderName);
+      form.append('lastName', data.cvv);
+      form.append('country', data.cvv);
+      form.append('city', data.cvv);
+      form.append('shippingAddress', data.cvv);
+      form.append('cardNumber', data.cvv);
+      form.append('cardholderName', data.cvv);
+      form.append('cvv', data.cvv);
+      form.append('profile', data.profile as File);*/
+
+      try {
+        /*const res = await axios.post<UploadResponse>(
+          'http://localhost:5174/api/data',
+          form,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: (progressEvent) => {
+              if (progressEvent.total) {
+                const percentCompleted = Math.round(
+                  (progressEvent.loaded * 100) / progressEvent.total
+                );
+
+                setUploadPercentage(percentCompleted);
+              }
+            }
+          }
+        );*/
+
+        const res = await axios.post<UploadResponse>(
+          'http://localhost:5174/api/data',
+          data
+        );
+        const result = res.data;
+
+        if (!result.ok) {
+          setStatus(
+            `Upload failed: ${'error' in result ? result.error : res.statusText}`
+          );
+          return;
+        }
+
+        setStatus(
+          `Uploaded: ${result.originalName} -> ${result.storedName} (${String(result.size)} bytes, ${result.mimeType})`
+        );
+        toast({
+          title: 'Form Submitted Successfully!',
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(result, null, 2)}
+              </code>
+            </pre>
+          )
+        });
+      } catch (error) {
+        console.error('Upload error:', error);
+        setUploadPercentage(0); // Reset or set to error state
+      }
+
+      //const res = await axios.post('/api/upload', data);
+
       // Perform your form submission logic here
-      console.log('data', data);
       toast({
         title: 'Form Submitted Successfully!',
         description: (
@@ -166,6 +253,7 @@ const MultiStepForm = ({
             <PrevButton />
           </form>
         </div>
+        <div>{uploadPercentage} %</div>
       </FormProvider>
     </MultiStepFormContext.Provider>
   );

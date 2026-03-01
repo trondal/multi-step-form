@@ -2,6 +2,13 @@ import { ZodType } from 'zod';
 import { CombinedCheckoutType } from './web/validators/checkout-flow.validator';
 import { LucideIcon } from 'lucide-react';
 
+export const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp'
+];
+
 type FieldKeys = keyof CombinedCheckoutType;
 
 export interface MultiStepFormContextProps {
