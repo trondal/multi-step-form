@@ -32,14 +32,14 @@ export const checkoutSteps: FormStep[] = [
     validationSchema: step2Schema,
     fields: ['country', 'city', 'shippingAddress']
   },
-  {
+  /* {
     title: 'Step 3: File upload',
     component: <Step3 />,
     icon: HomeFilledIcon,
     position: 3,
     validationSchema: step3Schema,
     fields: ['fil']
-  },
+  }, */
   {
     title: 'Step 4: Payment Details',
     component: <Step4 />,

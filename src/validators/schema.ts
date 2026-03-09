@@ -28,6 +28,7 @@ export const step2Schema = z.object({
 export const step3Schema = z.object({
   fil: z
     .file()
+    //.refine((files) => files.length === 0, 'At least one file i required')
     .max(1024 * 1024)
     .mime('image/png', { error: 'Only png files' })
 });
@@ -49,7 +50,7 @@ export const step4Schema = z.object({
 export const CombinedCheckoutSchema = z.object({
   ...step1Schema.shape,
   ...step2Schema.shape,
-  ...step3Schema.shape,
+  //...step3Schema.shape,
   ...step4Schema.shape
 });
 

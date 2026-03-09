@@ -20,7 +20,7 @@ const Step3 = () => {
   return (
     <div>
       <div>
-        <input type="file" {...register('fil')} name="fil" />
+        <input type="file" {...register('fil')} name="fil" multiple />
         <ErrorMessage message={errors.fil?.message} />
       </div>
       <NextButton type="submit" onClick={handleStepSubmit} />
