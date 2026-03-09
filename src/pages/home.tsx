@@ -4,11 +4,11 @@ import Step2 from './checkout/Step2';
 import {
   step1Schema,
   step2Schema,
-  step3Schema,
+  //step3Schema,
   step4Schema
 } from '../validators/schema';
 import MultiStepForm from '../components/StepList/MultiStepForm';
-import Step3 from './checkout/Step3';
+//import Step3 from './checkout/Step3';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeFilledIcon from '@mui/icons-material/HomeFilled';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
