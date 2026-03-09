@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 import vitest from '@vitest/eslint-plugin';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'node_modules'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
