@@ -23,11 +23,23 @@ const Step2 = () => {
   return (
     <div>
       <div>
-        <TextField fullWidth {...register('country')} placeholder="Country" />
+        <TextField
+          fullWidth
+          {...register('country')}
+          placeholder="Country"
+          label="Country"
+          margin="normal"
+        />
         <ErrorMessage message={errors.country?.message} />
       </div>
       <div>
-        <TextField fullWidth {...register('city')} placeholder="City" />
+        <TextField
+          fullWidth
+          {...register('city')}
+          placeholder="City"
+          label="City"
+          margin="normal"
+        />
         <ErrorMessage message={errors.city?.message} />
       </div>
       <div>
@@ -35,6 +47,8 @@ const Step2 = () => {
           fullWidth
           {...register('shippingAddress')}
           placeholder="Shipping Address"
+          label="Shipping Address"
+          margin="normal"
         />
         <ErrorMessage message={errors.shippingAddress?.message} />
       </div>

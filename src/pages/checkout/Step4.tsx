@@ -23,6 +23,8 @@ const Step4 = () => {
           fullWidth
           {...register('cardNumber')}
           placeholder="Card Number"
+          label="Card Number"
+          margin="normal"
         />
         <ErrorMessage message={errors.cardNumber?.message} />
       </div>
@@ -31,11 +33,19 @@ const Step4 = () => {
           fullWidth
           {...register('cardholderName')}
           placeholder="Card Holder Name"
+          label="Card Holder Name"
+          margin="normal"
         />
         <ErrorMessage message={errors.cardholderName?.message} />
       </div>
       <div>
-        <TextField fullWidth {...register('cvv')} placeholder="CVV" />
+        <TextField
+          fullWidth
+          {...register('cvv')}
+          placeholder="CVV"
+          label="CVV"
+          margin="normal"
+        />
         <ErrorMessage message={errors.cvv?.message} />
       </div>
       <NextButton type="submit" onClick={handleStepSubmit} />
