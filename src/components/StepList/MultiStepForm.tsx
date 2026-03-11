@@ -30,15 +30,15 @@ const MultiStepForm = ({
   const methods = useForm<z.infer<typeof CombinedCheckoutSchema>>({
     resolver: zodResolver(CombinedCheckoutSchema),
     defaultValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      country: '',
-      city: '',
-      shippingAddress: '',
-      cardholderName: '',
-      cardNumber: '',
-      cvv: ''
+      email: 'chester@nimitz.com',
+      firstName: 'Chester',
+      lastName: 'Nimitz',
+      country: 'USA',
+      city: 'Arlington',
+      shippingAddress: 'Midway',
+      cardholderName: 'Chester Nimitz',
+      cardNumber: '2323456456456',
+      cvv: '134'
     }
   });
 
