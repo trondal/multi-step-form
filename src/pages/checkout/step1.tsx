@@ -35,7 +35,13 @@ const Step1 = () => {
   return (
     <div>
       <div>
-        <TextField fullWidth {...register('email')} placeholder="Email" />
+        <TextField
+          fullWidth
+          {...register('email')}
+          placeholder="Email"
+          label="Email"
+          margin="normal"
+        />
         <ErrorMessage message={errors.email?.message} />
       </div>
       <div>
@@ -43,6 +49,8 @@ const Step1 = () => {
           fullWidth
           {...register('firstName')}
           placeholder="First Name"
+          label="First Name"
+          margin="normal"
         />
         <ErrorMessage message={errors.firstName?.message} />
       </div>
@@ -51,6 +59,8 @@ const Step1 = () => {
           fullWidth
           {...register('lastName')}
           placeholder="Last Name"
+          label="Last Name"
+          margin="normal"
         />
         <ErrorMessage message={errors.lastName?.message} />
       </div>
