@@ -8,6 +8,7 @@ uploadRouter.post('/upload', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ ok: false, error: 'No file uploaded' });
   }
+  console.log(JSON.stringify(req.body, null, 2));
 
   return res.json({
     ok: true,

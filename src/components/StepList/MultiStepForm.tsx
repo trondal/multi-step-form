@@ -1,7 +1,7 @@
 import { z } from 'zod';
+import axios from 'axios';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-//import { useLocalStorage } from '@mantine/hooks';
 import { DevTool } from '@hookform/devtools';
 import {
   type FormStep,
@@ -21,8 +21,7 @@ import Snackbar, { type SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const MultiStepForm = ({
-  steps,
-  localStorageKey
+  steps
 }: {
   steps: FormStep[];
   localStorageKey: string;
@@ -37,12 +36,10 @@ const MultiStepForm = ({
       city: 'Arlington',
       shippingAddress: 'Midway',
       cardholderName: 'Chester Nimitz',
-      cardNumber: '2323456456456',
+      cardNumber: '5186001700009908',
       cvv: '134'
     }
   });
-
-  console.log(localStorageKey);
 
   const [open, setOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -136,9 +133,30 @@ const MultiStepForm = ({
     data: z.infer<typeof CombinedCheckoutSchema>
   ) {
     try {
+      //clearFormState();
+
+      const form = new FormData();
+      form.append('email', data.email);
+      form.append('firstName', data.firstName);
+      form.append('lastName', data.lastName);
+      form.append('country', data.country);
+      form.append('city', data.city);
+      form.append('shippingAddress', data.shippingAddress);
+      form.append('file', data.file[0]);
+      form.append('cardNumber', data.cardNumber);
+      form.append('cardholderName', data.cardholderName);
+      form.append('cvv', data.cvv);
+
+      const res = await axios.post(`http://localhost:5174/api/upload`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      if (!res.data.ok) {
+        setToastMessage('Upload failed');
+      }
       setOpen(true);
       setToastMessage(JSON.stringify(data, null, 2));
-      //clearFormState();
     } catch (error) {
       console.error('Form submission error:', error);
     }
