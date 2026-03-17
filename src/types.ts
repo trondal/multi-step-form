@@ -41,3 +41,9 @@ export type User = {
   cardholderName: string;
   cvv: number;
 };
+
+export type PostResult = {
+  ok: boolean;
+  fileId: number;
+  userId: number;
+};
