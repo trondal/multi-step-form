@@ -44,38 +44,8 @@ const MultiStepForm = ({
   const [open, setOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  //const { toast } = useToast();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
-
-  /*const [savedFormState, setSavedFormState] =
-    useLocalStorage<SavedFormState | null>({
-      key: localStorageKey,
-      defaultValue: null
-    });*/
-
-  // Restore form state from LS
-  /*useEffect(() => {
-    if (savedFormState) {
-      setCurrentStepIndex(savedFormState.currentStepIndex);
-      methods.reset(savedFormState.formValues);
-    }
-  }, [methods, savedFormState]);*/
-
-  /*const saveFormState = (stepIndex: number) => {
-    const formValues = methods.getValues();
-    setSavedFormState({
-      currentStepIndex: stepIndex ?? currentStepIndex,
-      formValues
-    });
-  };*/
-
-  /*const clearFormState = () => {
-    setSavedFormState(null);
-    setCurrentStepIndex(0);
-    methods.reset();
-    window.localStorage.removeItem(localStorageKey);
-  };*/
 
   const nextStep = async () => {
     const isValid = await methods.trigger(currentStep.fields);

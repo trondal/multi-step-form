@@ -3,7 +3,8 @@ import cors from 'cors';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { uploadRouter } from './router/upload';
-import { getFiles } from './db/queries';
+import { getFiles, getUsers } from './db/queries';
+import type { User } from '../types';
 
 const app = express();
 const PORT = Number(process.env.API_PORT ?? 5174);
@@ -42,6 +43,30 @@ app.get('/files', (_req, res) => {
       filename: file.filename,
       path: file.path,
       size: file.size
+    };
+  });
+
+  res.json(json);
+});
+
+app.get('/users', (_req, res) => {
+  // Missing transactions, missing console.log statemenets for each query.
+
+  const users = getUsers.all() as unknown as User[];
+
+  const json = users.map((user) => {
+    return {
+      id: user?.id,
+      firstName: user?.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      city: user.city,
+      shippingAddress: user.shippingAddress,
+      fileId: user.fileId,
+      cardNumber: user.cardNumber,
+      cardholderName: user.cardholderName,
+      cvv: user.cvv
     };
   });
 
