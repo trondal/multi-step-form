@@ -27,3 +27,17 @@ export type SavedFormState = {
   currentStepIndex: number;
   formValues: Record<string, unknown>;
 };
+
+export type User = {
+  id?: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+  city: string;
+  shippingAddress: string;
+  fileId: number;
+  cardNumber: number;
+  cardholderName: string;
+  cvv: number;
+};
