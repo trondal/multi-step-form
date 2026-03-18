@@ -16,7 +16,7 @@ export async function getUsers(signal: AbortSignal) {
   return result.data as User[];
 }
 
-export async function postForm(form: FormData, signal: AbortSignal) {
+export async function postForm(form: FormData, signal?: AbortSignal) {
   const result = await axios.post(`http://localhost:5174/api/upload`, form, {
     signal: signal,
     headers: {

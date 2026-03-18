@@ -1,13 +1,8 @@
 import { z } from 'zod';
-import axios from 'axios';
 import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DevTool } from '@hookform/devtools';
-import {
-  type FormStep,
-  type MultiStepFormContextProps
-  //type SavedFormState
-} from '../../types';
+import { type FormStep, type MultiStepFormContextProps } from '../../types';
 import { PrevButton } from './PrevButton';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
@@ -19,6 +14,8 @@ import ProgressIndicator from './ProgressIndicator';
 import { MultiStepFormContext } from '../../pages/MultiStepFormContext';
 import Snackbar, { type SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { useMutation } from '@tanstack/react-query';
+import { postForm } from '../../services/axios';
 
 const MultiStepForm = ({
   steps
@@ -99,6 +96,11 @@ const MultiStepForm = ({
     }
   };
 
+  const mutation = useMutation({
+    mutationKey: ['post'],
+    mutationFn: (data: FormData) => postForm(data)
+  });
+
   async function submitSteppedForm(
     data: z.infer<typeof CombinedCheckoutSchema>
   ) {
@@ -117,14 +119,15 @@ const MultiStepForm = ({
       form.append('cardholderName', data.cardholderName);
       form.append('cvv', data.cvv);
 
-      const res = await axios.post(`http://localhost:5174/api/upload`, form, {
+      mutation.mutateAsync(form);
+      /* const tres = await axios.post(`http://localhost:5174/api/upload`, form, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      });
-      if (!res.data.ok) {
+      }); */
+      /* if (!res.data.ok) {
         setToastMessage('Upload failed');
-      }
+      } */
       setOpen(true);
       setToastMessage(JSON.stringify(data, null, 2));
     } catch (error) {
